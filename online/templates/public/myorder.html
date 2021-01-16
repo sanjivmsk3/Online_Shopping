@@ -1,0 +1,38 @@
+{% extends 'public/base.html' %}
+
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                {% for o in order %}
+                <div class="card">
+                    <div class="card-header">Order Id : {{ o.ref_code }}</div>
+              {% for o_i in o.items.all %}
+                <div class="card mb-3 shadow-sm" style="max-width: 1120px;">
+                    <div class="row g-0">
+                      <div class="col-md-10">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ o_i.item.title }}</h5>
+                            <br>
+                            <br>
+                            <h4 class="d-inline text-success">₹{{ o_i.get_total_discount_price }} /-</h4>
+                            <h5 class="d-inline text-danger"> <del>{{ o_i.get_total_price }}</del> </h5>
+                            <h5 class="d-inline text-success small">(₹{{ o_i.get_total_saving }})</del> </h5>
+                          </div>
+                      </div>
+                      <div class="col-md-2">
+                        <img src="{{ o_i.item.image.url }}" class="card-img-top" height="250px" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+
+           
+        </div>
+    </div>
+{% endblock %}

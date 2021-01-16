@@ -1,0 +1,49 @@
+{% extends 'public/base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card border-0">
+                    <div class="card-header bg-primary text-white fw-bold">DELIVERY ADDRESS</div>
+                    <form action="{% url 'makepayment' %}" method="POST">
+                        {% csrf_token %}
+                        {% for ai in showadd %}
+                            <div class="card border-bottom-1" style="background-color: #ffffff;">
+                                <div class="form-check px-5 mt-2">
+                                    <input value="{{ai.id}}" class="form-check-input" type="radio" style="cursor: pointer;" name="adds">
+                                    <label class="form-check-label fw-bold">{{ ai.name }}</label>
+                                    <span class="badge bg-light text-dark">Home</span>
+                                    <label class="fw-bold">{{ ai.contact }}</label>
+                                    <a href="{% url 'homepage' %}" class="btn btn-primary">Update</a>
+                                </div>
+                                    <div class="card-body px-5" style="margin-top: -28px;">
+                                    <p class="card-text" style="margin-top: -5px; font-size: 15px;">{{ai.locality}}, {{ai.city}}, {{ai.state}}-{{ai.pincode}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% if showadd %}
+                        <input type="submit" value="DELIVER HERE" class="btn text-white" style="margin-top: 8px; background-color: #ef6c00;">
+                    {% endif %}
+                </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header text-primary">Add a new address</div>
+                    <div class="card-body">
+                        <form action="{% url 'checkout' %}" method="POST">
+                            {% csrf_token %}
+                            {{ addform|crispy }}
+                            <div class="form-group mt-2">
+                                <input type="submit" class="btn btn-success float-end">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

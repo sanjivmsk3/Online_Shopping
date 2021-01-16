@@ -1,0 +1,47 @@
+{% extends 'public/base.html' %}
+ {% block title %}Home {% endblock %}
+
+ {% block content %}
+     <div class="row m-5">
+        <div class="col-lg-3">
+          <div class="card" style="width: 340px;">
+            <img src="{{ item.image.url}}" class="card-img-top" height="460px" alt="">
+         
+         <div class="card-body ">
+          <div class="d-grid gap-2">
+            <a href="{% url 'add-to-cart' item.slug %}" class="btn btn-success">Buy Now</a>
+            <a href="" class="btn btn-primary">Add-To-Cart</a>
+          </div>
+         </div>
+        </div>
+        </div>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-7">
+            <h4>{{ item.title }}</h4>
+            <table class="table table-striped borderless">
+                <tbody>
+                  <tr>
+                    <th scope="row">Category</th>
+                    <td>{{ item.category }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Brand</th>
+                    <td>{{ item.brand}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <b class="text-success">Special Price</b>
+              <h3>₹ {{ item.discount_price }} <del class="text-muted lead">{{ item.price }}</del> </h3>
+        </div>
+        <div class="col-lg-4"></div>
+        <div class="col-lg-8">
+            <div class="card border-primary">
+                <div class="card-header h5 text-white bg-primary">Description</div>
+                <div class="card-body">
+                  <p class="card-text">{{ item.description }}.</p>
+                </div>
+              </div>
+        </div>
+    </div>
+           
+  {% endblock %}

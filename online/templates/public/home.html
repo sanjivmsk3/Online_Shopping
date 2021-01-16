@@ -1,0 +1,33 @@
+{% extends 'public/base.html' %}
+ {% block title %}Home {% endblock %}
+
+ {% block content %}
+ <div class="container-fluid p-0 ">
+     <div class="row no-gutter">
+         <div class="col-lg-3 p-0">
+             <div class="list-group">
+                 <a href="" class="list-group-item list-group-item-action bg-dark text-white text-center">Category</a>
+                 {% for c in cat %}
+                 <a href="{% url 'cat' c.slug %}" class="list-group-item list-group-item-action">{{c.title}}</a>
+                 {% endfor %}
+             </div>
+         </div>
+         <div class="col-lg-9 mt-3">
+             <div class="row">
+                 {% for i in item %}
+                 <div class="col-lg-4">
+                     <div class="card">
+                         <img src="{{ i.image.url}}" height="250px" alt="">
+                         <div class="card-body">
+                             <h6 class="text-truncate">{{ i.title}}</h6>
+                             <p class="lead text-success">Rs. <del class="text-danger">{{i.price}}</del> {{i.discount_price}}</p>
+                            <a href="{% url 'product' i.slug %}" class="btn btn-outline-success stretched-link">Add-To-Cart</a>
+                         </div>
+                     </div>
+                 </div>
+                 {% endfor %}
+             </div>
+         </div>
+     </div>
+ </div>
+  {% endblock %}
